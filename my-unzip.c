@@ -1,12 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <err.h>
 
-#define BUFFERLEN 5
-
-char BUFFER[BUFFERLEN];
-
+/* File opening and error handling */
 FILE *openFile(const char* name) {
     FILE *fp = fopen("output.z", "rb");
 
@@ -18,6 +13,7 @@ FILE *openFile(const char* name) {
     return fp;
 }
 
+/* Decodes the given encoded file into stdout in 5 byte chunks */
 void decode(FILE *fp) {
     int num = 0;
     char c;
@@ -32,13 +28,13 @@ void decode(FILE *fp) {
 
 int main(int argc, char const *argv[])
 {
+    /* Usage print when lacking parameters */
     if (argc < 2) {
         printf("my-unzip: file1 [file2 ...]\n");
         exit(1);
     }
 
     FILE *fp;
-    
     for (int i = 1; i < argc; i++)
     {
         fp = openFile(argv[i]);

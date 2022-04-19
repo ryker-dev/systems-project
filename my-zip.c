@@ -22,26 +22,23 @@ int main(int argc, char const *argv[])
 {
      FILE *in = openFile();
 
-    char newChar, curChar;
-    int buff[1];
-    int counter = 0b0000000;
-    while ((newChar = getc(in)) != EOF) {
+    char newChar, lastChar;
+    // int buff[1];
+    int counter = 0;
+    while (lastChar != EOF) {
+        newChar = getc(in);
         if (counter > 0) {
-            printf("counter > 0\n");
-            if (newChar != curChar) {
-                buff[0] = counter;
-                printf("%d%c|", buff[0], curChar);
-                fwrite(buff, 4, 1, stdout);
-                fputc(curChar, stdout);
-                curChar = newChar;
-                counter = 0b00000000;
-                continue;
+            if (newChar != lastChar) {
+                fwrite(&counter, sizeof(counter), 1, stdout);
+                fputc(lastChar, stdout);
+                lastChar = newChar;
+                counter = 1;
+            } else {
+                counter++;
             }
-            counter++;
         } else {
-            printf("increase\n");
             counter++;
-            curChar = newChar;
+            lastChar = newChar;
         }
     };
 

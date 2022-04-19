@@ -1,6 +1,2 @@
 # systems-project
-#asd
-asdasdasdasd
-neljäs line 
-vitonen
-kuusi
+A project for a university course

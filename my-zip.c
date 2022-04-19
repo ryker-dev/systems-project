@@ -20,6 +20,10 @@ FILE *openFile(const char* name) {
 
 int main(int argc, char const *argv[])
 {
+    if (argc < 2) {
+        printf("my-zip: file1 [file2 ...]\n");
+        exit(1);
+    }
     
     FILE *in = openFile(argv[1]);
 

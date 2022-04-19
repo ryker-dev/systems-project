@@ -20,7 +20,12 @@ FILE *openFile() {
 
 int main(int argc, char const *argv[])
 {
-     FILE *in = openFile();
+    if (argc < 2) {
+        printf("my-unzip: file1 [file2 ...]\n");
+        exit(1);
+    }
+
+    FILE *in = openFile();
 
     int num = 0;
     char c;

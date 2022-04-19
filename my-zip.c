@@ -7,8 +7,8 @@
 
 //char BUFFER[BUFFERLEN];
 
-FILE *openFile() {
-    FILE *fp = fopen("input.txt", "r");
+FILE *openFile(const char* name) {
+    FILE *fp = fopen(name, "r");
 
     if (fp == NULL) {
         printf("cannot open file\n");
@@ -20,7 +20,8 @@ FILE *openFile() {
 
 int main(int argc, char const *argv[])
 {
-     FILE *in = openFile();
+    
+    FILE *in = openFile(argv[1]);
 
     char newChar, lastChar;
     // int buff[1];

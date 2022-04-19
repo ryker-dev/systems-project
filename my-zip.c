@@ -18,20 +18,11 @@ FILE *openFile(const char* name) {
     return fp;
 }
 
-int main(int argc, char const *argv[])
-{
-    if (argc < 2) {
-        printf("my-zip: file1 [file2 ...]\n");
-        exit(1);
-    }
-    
-    FILE *in = openFile(argv[1]);
-
-    char newChar, lastChar;
-    // int buff[1];
+void encode(FILE *fp) {
+    char newChar, lastChar = 0;
     int counter = 0;
     while (lastChar != EOF) {
-        newChar = getc(in);
+        newChar = getc(fp);
         if (counter > 0) {
             if (newChar != lastChar) {
                 fwrite(&counter, sizeof(counter), 1, stdout);
@@ -46,6 +37,21 @@ int main(int argc, char const *argv[])
             lastChar = newChar;
         }
     };
+}
+
+int main(int argc, char const *argv[])
+{
+    if (argc < 2) {
+        printf("my-zip: file1 [file2 ...]\n");
+        exit(1);
+    }
+    
+    FILE *fp;
+    for (int i = 1; i < argc; i++)
+    {
+        fp = openFile(argv[i]);
+        encode(fp);
+    }
 
     return 0;
 }

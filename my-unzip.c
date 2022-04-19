@@ -7,7 +7,7 @@
 
 char BUFFER[BUFFERLEN];
 
-FILE *openFile() {
+FILE *openFile(const char* name) {
     FILE *fp = fopen("output.z", "rb");
 
     if (fp == NULL) {
@@ -18,6 +18,18 @@ FILE *openFile() {
     return fp;
 }
 
+void decode(FILE *fp) {
+    int num = 0;
+    char c;
+    while (fread(&num,4,1,fp) == 1) {
+        fread(&c,1,1,fp);
+        for (int i = 0; i < num; i++)
+        {
+            printf("%c", c);
+        }
+    }
+}
+
 int main(int argc, char const *argv[])
 {
     if (argc < 2) {
@@ -25,20 +37,13 @@ int main(int argc, char const *argv[])
         exit(1);
     }
 
-    FILE *in = openFile();
-
-    int num = 0;
-    char c;
-    while (fread(&num,4,1,in) == 1) {
-        fread(&c,1,1,in);
-        for (int i = 0; i < num; i++)
-        {
-            printf("%c", c);
-        }
-    }
+    FILE *fp;
     
-/*     fread(BUFFER,5,1,in);
-    printf("%s", BUFFER); */
+    for (int i = 1; i < argc; i++)
+    {
+        fp = openFile(argv[i]);
+        decode(fp);
+    }
 
     return 0;
 }

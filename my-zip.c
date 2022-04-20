@@ -48,6 +48,7 @@ int main(int argc, char const *argv[])
     {
         fp = openFile(argv[i]);
         encode(fp);
+        fclose(fp);
     }
 
     return 0;

@@ -39,6 +39,7 @@ int main(int argc, char const *argv[])
     {
         fp = openFile(argv[i]);
         decode(fp);
+        fclose(fp);
     }
 
     return 0;

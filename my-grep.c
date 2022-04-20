@@ -15,10 +15,10 @@ int main(int argc, char const *argv[]){
         exit(1); 
     }
     else if (argc == 2){
-        printf("2 argc\n");
         while (getline(&line, &len, stdin) != -1) {
             if(strstr(line,argv[1]))
-            fputs (line, stdout); 
+            fputs(line, stdout); 
+            //printf("%s",line);
             //free(line);   //turha??
         }
     }
@@ -34,6 +34,7 @@ int main(int argc, char const *argv[]){
             while (getline(&line, &len, fp) != -1) {
                 if(strstr(line,argv[1]))
                 fputs(line, stdout); 
+                //printf("%s",line); 
             }
 
             free(line); //turha??

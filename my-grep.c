@@ -1,3 +1,5 @@
+/* help from https://dev-notes.eu/2019/07/Get-a-line-from-stdin-in-C/ */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -19,10 +21,8 @@ int main(int argc, char const *argv[]){
             fputs (line, stdout); 
             //free(line);   //turha??
         }
-        
     }
     else{
-        
         for (int i = 2; i < argc; i++){
 
             FILE *fp = fopen(argv[i], "r");

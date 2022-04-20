@@ -28,26 +28,27 @@ void reverse(FILE *input, FILE *output) {
 
     int length, index = 0;
     lines[0] = NULL;
-    /* Method for allocation by anioss from stackoverflow.com */
+    /* Method for array allocation by anioss from stackoverflow.com */
+    /* MAN: Alternatively, before calling getline(), *lineptr can contain a pointer to a malloc(3)-allocated buffer *n bytes in size.
+    If the buffer is not large enough to hold the line, getline() resizes it with realloc(3), updating *lineptr and *n as necessary. */
     while ((length = getline(&lines[index], &buffsize, input)) != -1) {
-/*         if (lines[length - 1] == '\n') {
-            lines[length - 1] = '\0';
-        }; */
-        printf("%s", lines[index]);
+        fwrite(lines[index], sizeof(lines[index]), 1, stdout);
         lines[index + 1] = NULL;
         index++;
-/*         lines[index] = malloc(strlen(buffer) + 1);
-        strcpy(lines[index], buffer);
-        index++; */
-    }
-    
-    for (int i = index; i > -1; i--)
-    {
-/*         char *lastChar = lines[i][strlen(string)-1];
-        if (lastChar == '\n') {} */
-        printf("%s\n", lines[i]);
     }
 
+    printf("\n");
+    for (int i = index - 1; i > -1; i--)
+    {
+        fwrite(lines[i], sizeof(lines[i]), 1, stdout);
+/*         printf("%s", lines[i]);
+
+        if (lines[i][strlen(lines[i])-1] != '\n') {
+            printf("\n");
+        } */
+    }
+
+    free(lines);
 }
 
 int main(int argc, char const *argv[])

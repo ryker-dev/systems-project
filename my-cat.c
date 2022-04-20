@@ -5,25 +5,21 @@
 
 int main(int argc, char const *argv[]){
 
-    char buffer[10];
-    char file[256];
-    int i=1;
-    while (i < argc){
-        strcpy(file, argv[i]);
-
-        FILE *fp = fopen(file, "r");
+    char buffer[11];
+    for (int i = 1; i < argc; i++)
+    {
+        FILE *fp = fopen(argv[i], "r");
 
         if (fp == NULL) {
             printf("my-cat: cannot open file\n");
             exit(1);
         }
 
-        while (fgets(buffer,sizeof(buffer),fp) != NULL){
+        while (fgets(buffer,sizeof(buffer) - 1,fp) != NULL){
             printf("%s" ,buffer);
         }
 
         fclose(fp); 
-        i++;
     }
 
     return 0;

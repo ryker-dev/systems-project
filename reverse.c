@@ -32,7 +32,7 @@ void reverse(FILE *input, FILE *output) {
     /* MAN: Alternatively, before calling getline(), *lineptr can contain a pointer to a malloc(3)-allocated buffer *n bytes in size.
     If the buffer is not large enough to hold the line, getline() resizes it with realloc(3), updating *lineptr and *n as necessary. */
     while ((length = getline(&lines[index], &buffsize, input)) != -1) {
-        fwrite(lines[index], sizeof(lines[index]), 1, stdout);
+        fprintf(stdout, "%s", lines[index]);
         lines[index + 1] = NULL;
         index++;
     }
@@ -40,12 +40,11 @@ void reverse(FILE *input, FILE *output) {
     printf("\n");
     for (int i = index - 1; i > -1; i--)
     {
-        fwrite(lines[i], sizeof(lines[i]), 1, stdout);
-/*         printf("%s", lines[i]);
+        fprintf(stdout, "%s", lines[i]);
 
         if (lines[i][strlen(lines[i])-1] != '\n') {
-            printf("\n");
-        } */
+            fprintf(stdout, "\n");
+        }
     }
 
     free(lines);

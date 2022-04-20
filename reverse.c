@@ -22,6 +22,7 @@ void reverse(FILE *input, FILE *output) {
 
     /*  Method for array allocation by anioss from stackoverflow.com
         "getline line by line and then store entire lines in an array in C [closed]"
+        https://stackoverflow.com/questions/34296079/getline-line-by-line-and-then-store-entire-lines-in-an-array-in-c
     */
     /*  MAN: Alternatively, before calling getline(), *lineptr can contain a pointer to a malloc(3)-allocated buffer *n bytes in size.
         If the buffer is not large enough to hold the line, getline() resizes it with realloc(3), updating *lineptr and *n as necessary.

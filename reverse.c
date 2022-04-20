@@ -16,7 +16,6 @@ FILE *openFile(const char* name, char* mode) {
 
 void reverse(FILE *input, FILE *output) {
     //int lengths = 10;
-    char *buffer;
     char **lines;
     size_t buffsize = 32;
     lines = malloc(buffsize * sizeof(char*));

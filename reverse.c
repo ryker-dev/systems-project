@@ -30,7 +30,6 @@ void reverse(FILE *input, FILE *output) {
         lines[index + 1] = NULL;
         index++;
     }
-    printf("\n");
 
     for (int i = index - 1; i > -1; i--)
     {

@@ -5,12 +5,24 @@
 
 int main(int argc, char const *argv[]){
 
-    FILE *fp;
+    if (argc < 2){
+        printf("my-grep: searchterm [file ...]\n");
+        exit(1); //??
+    }
+
     int last_arg = argc;
     printf("arg määrä = %d\n",last_arg);
-    //char filename[]="test.txt",line[200],search_string[]="Foo";
-    char filename[]="test.txt";
-    char search_string[]="foo";
+    //char filename[]="test.txt",line[200],search_string[]="foo";
+    char filename[256];
+    char search_string[256];
+    strcpy(file, argv[i]);
+
+    FILE *fp = fopen(file, "r");
+    if (fp == NULL) {
+        printf("my-cat: cannot open file\n");
+        exit(1);
+    }
+
     char line[200];
     fp=fopen(filename,"r");
     if(!fp){
@@ -21,6 +33,7 @@ int main(int argc, char const *argv[]){
         if(strstr(line,search_string))
         fputs ( line, stdout ); /* write the line */
     }
-    fclose ( fp );
+
+    fclose (fp);
     return 0;
 }

@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define BUFFERSIZE 10
+
 /* File opening and error handling */
 FILE *openFile(const char* name, char* mode) {
     FILE *fp = fopen(name, mode);
@@ -19,9 +21,9 @@ FILE *openFile(const char* name, char* mode) {
 void reverse(FILE *input) {
     /* TODO: add malloc errors */
     //int lengths = 10;
-    char **lines;
-    size_t buffsize = 32;
-    lines = malloc(buffsize * sizeof(char*));
+    long *linestarts;
+    int buffsize = BUFFERSIZE;
+    linestarts = malloc(buffsize * sizeof(long*));
 
     /*  Method for array allocation by anioss from stackoverflow.com
         "getline line by line and then store entire lines in an array in C [closed]"
@@ -30,24 +32,27 @@ void reverse(FILE *input) {
     /*  MAN: Alternatively, before calling getline(), *lineptr can contain a pointer to a malloc(3)-allocated buffer *n bytes in size.
         If the buffer is not large enough to hold the line, getline() resizes it with realloc(3), updating *lineptr and *n as necessary.
     */
-    int length, index = 0;
-    lines[0] = NULL;
-    while ((length = getline(&lines[index], &buffsize, input)) != -1) {
-        lines[index + 1] = NULL;
-        index++;
-    }
 
-    for (int i = index - 1; i > -1; i--)
-    {
-        fprintf(stdout, "%s", lines[i]);
+   char c;
+   long counter = 0;
+   int index = 0;
+   while ((c = getc(input)) != EOF) {
+       if (c == '\n') {
+           printf("FOUND: %ld\n", counter);
+           if (index + 1 == buffsize) {
+               printf("BUFFER TOO SMALL!\n");
+               buffsize = buffsize + BUFFERSIZE;  
+               linestarts = realloc(linestarts, buffsize);
+           }
+           linestarts[index] = counter;
+           index++;
+       }
+       counter++;
+   }
 
-        /* Take into account the possibility of a missing new line */
-        if (lines[i][strlen(lines[i])-1] != '\n') {
-            fprintf(stdout, "\n");
-        }
-    }
-
-    free(lines);
+/*     for (int i = index; i >= 0; i--) {
+       fprintf(stdout, "%d\n", linestarts[i]);
+    } */
 }
 
 int main(int argc, char const *argv[])

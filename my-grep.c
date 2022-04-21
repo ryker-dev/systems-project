@@ -1,5 +1,6 @@
-/* help from https://dev-notes.eu/2019/07/Get-a-line-from-stdin-in-C/ */
+/* Author: Juho Spoof */
 
+/* help from https://dev-notes.eu/2019/07/Get-a-line-from-stdin-in-C/ */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

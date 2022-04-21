@@ -33,6 +33,7 @@ int main(int argc, char const *argv[]){
                 if(strstr(line,argv[1]))
                 fputs(line, stdout); 
             }
+            free(line);
             fclose(fp);
         }
     }

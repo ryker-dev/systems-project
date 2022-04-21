@@ -18,8 +18,6 @@ int main(int argc, char const *argv[]){
         while (getline(&line, &len, stdin) != -1) {
             if(strstr(line,argv[1]))
             fputs(line, stdout); 
-            //printf("%s",line);
-            //free(line);   //turha??
         }
     }
     else{
@@ -34,10 +32,7 @@ int main(int argc, char const *argv[]){
             while (getline(&line, &len, fp) != -1) {
                 if(strstr(line,argv[1]))
                 fputs(line, stdout); 
-                //printf("%s",line); 
             }
-
-            free(line); //turha??
             fclose(fp);
         }
     }

@@ -3,7 +3,7 @@
 
 /* File opening and error handling */
 FILE *openFile(const char* name) {
-    FILE *fp = fopen("output.z", "rb");
+    FILE *fp = fopen(name, "rb");
 
     if (fp == NULL) {
         printf("cannot open file\n");
@@ -26,8 +26,7 @@ void decode(FILE *fp) {
     }
 }
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
     /* Usage print when lacking parameters */
     if (argc < 2) {
         printf("my-unzip: file1 [file2 ...]\n");

@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define BUFFERSIZE 33
 
 int main(int argc, char const *argv[]){
 
-    char buffer[11];
+    char buffer[BUFFERSIZE];
     for (int i = 1; i < argc; i++)
     {
         FILE *fp = fopen(argv[i], "r");
@@ -15,7 +16,7 @@ int main(int argc, char const *argv[]){
             exit(1);
         }
 
-        while (fgets(buffer,sizeof(buffer) - 1,fp) != NULL){
+        while (fgets(buffer,BUFFERSIZE - 1,fp) != NULL){
             printf("%s" ,buffer);
         }
 

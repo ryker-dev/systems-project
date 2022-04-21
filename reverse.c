@@ -16,7 +16,8 @@ FILE *openFile(const char* name, char* mode) {
     return fp;
 }
 
-void reverse(FILE *input, FILE *output) {
+void reverse(FILE *input) {
+    /* TODO: add malloc errors */
     //int lengths = 10;
     char **lines;
     size_t buffsize = 32;
@@ -38,11 +39,11 @@ void reverse(FILE *input, FILE *output) {
 
     for (int i = index - 1; i > -1; i--)
     {
-        fprintf(output, "%s", lines[i]);
+        fprintf(stdout, "%s", lines[i]);
 
         /* Take into account the possibility of a missing new line */
         if (lines[i][strlen(lines[i])-1] != '\n') {
-            fprintf(output, "\n");
+            fprintf(stdout, "\n");
         }
     }
 
@@ -52,18 +53,18 @@ void reverse(FILE *input, FILE *output) {
 int main(int argc, char const *argv[])
 {
     /* Usage print when lacking parameters */
-    if (argc != 3) {
-        printf("usage: reverse <input> <output>\n");
+    if (argc < 2 || argc > 3) {
+        printf("usage: reverse <input> <stdout>\n");
         exit(1);
     }
     
-    FILE *input, *output;
+    FILE *input, *stdout;
     {
         input = openFile(argv[1], "r");
-        output = openFile(argv[2], "w");
-        reverse(input, output);
+        /* TODO: Add file openining error */
+        reverse(input);
         fclose(input);
-        fclose(output);
+        /* TODO: Add output to file if argc == 3 */
     }
 
     return 0;

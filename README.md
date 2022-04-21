@@ -1,12 +1,23 @@
 # systems-project
-A project for a university course
+A project for a university course.
+All the programs were programmed on Ubuntu 20.04.4 LTS and were built for GNU/Linux usage.
+
+## Compling the files
+Use GCC to compile the source files into executables.
+```
+Examples:   gcc my-cat.c -o my-cat -Wall -Werror
+            
+            gcc my-zip.c -o my-zip -Wall -Werror
+
+            . . .
+```
 
 ## my-cat
 Reads the given files and outputs the contents to *stdout*.
 ```
-Usage: ./my-cat file1 [file2 ...]
+Usage:      ./my-cat file1 [file2 ...]
 
-Example: ./my-cat file1.txt
+Example:    ./my-cat file1.txt
 ```
 ### Requirements
 - [X]   Reads a file as specified by the user and prints its contents
@@ -19,9 +30,9 @@ Example: ./my-cat file1.txt
 ## my-grep
 Searches the given searchterm from the given files and prints the lines containing the term to *stdout*.
 ```
-Usage: ./my-cat searchterm [file ...]
+Usage:      ./my-cat searchterm [file ...]
 
-Example: ./my-grep file1.txt file.c
+Example:    ./my-grep file1.txt file.c
 ```
 ### Requirements
 - [X]   Searches for case sensitive search terms from a file or stdin. If matches are found it prints the lines which has them.
@@ -35,9 +46,9 @@ Example: ./my-grep file1.txt file.c
 ## my-zip
 Performs simple run-length encoding on the given files and outputs the results to stdout. *It is recommended to redirect the results to a separate file. Example below.* __Note that if given multiple files they will be compressed into one output file!__
 ```
-Usage: ./my-zip file1 [file2 ...]
+Usage:      ./my-zip file1 [file2 ...]
 
-Example: ./my-zip file1.txt file2.txt > file.z
+Example:    ./my-zip file1.txt file2.txt > file.z
 ```
 ### Requirements
 - [X]   Outputs to stdout
@@ -48,9 +59,9 @@ Example: ./my-zip file1.txt file2.txt > file.z
 ## my-unzip
 Unzips files encoded with *my-zip* and redirects the results to stdout. *It is recommended to redirect the results to a separate file. Example below.*
 ```
-Usage: ./my-zip file1 [file2 ...]
+Usage:      ./my-zip file1 [file2 ...]
 
-./my-unzip file.z > output.txt
+Example:    ./my-unzip file.z > output.txt
 ```
 ### Requirements
 - [X]   Outputs to stdout

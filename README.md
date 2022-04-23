@@ -50,7 +50,9 @@ Reverses the given file. If an argument the program will use are given the progr
 Usage:      ./reverse input output
 
 Example:    ./reverse
+
             ./reverse input.txt
+            
             ./reverse input.txt output.txt
 ```
 

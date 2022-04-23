@@ -17,7 +17,6 @@ FILE *openFile(const char* name, char* mode) {
 }
 
 void reverse(FILE *input, FILE *output) {
-    /* TODO: add malloc errors */
     //int lengths = 10;
     char **lines;
     size_t buffsize = 32;
@@ -79,8 +78,6 @@ int main(int argc, char const *argv[])
             output = openFile(argv[2], "w");
             
         }
-    
-        /* TODO: Add file openining error */
 
         if (argc == 2){
             reverse(input,stdout);
@@ -94,7 +91,6 @@ int main(int argc, char const *argv[])
             fclose(output);
         }
 
-        /* TODO: Add output to file if argc == 3 */
     }
 
     return 0;

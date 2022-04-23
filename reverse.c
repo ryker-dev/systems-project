@@ -16,16 +16,18 @@ FILE *openFile(const char* name, char* mode) {
     return fp;
 }
 
-void reverse(FILE *input, char *output) {
+void reverse(FILE *input, FILE *output) {
     /* TODO: add malloc errors */
     //int lengths = 10;
     char **lines;
     size_t buffsize = 32;
 
-    FILE *write = openFile(output, "w");
+    if (output == NULL) {
+        output = stdout;
+    }
 
     if ((lines = malloc(buffsize * sizeof(char*))) == NULL){
-        perror("malloc failed\n");
+        fprintf(stderr, "malloc failed\n");
         exit(1);
     }
 
@@ -36,6 +38,7 @@ void reverse(FILE *input, char *output) {
     /*  MAN: Alternatively, before calling getline(), *lineptr can contain a pointer to a malloc(3)-allocated buffer *n bytes in size.
         If the buffer is not large enough to hold the line, getline() resizes it with realloc(3), updating *lineptr and *n as necessary.
     */
+
     int length, index = 0;
     lines[0] = NULL;
     while ((length = getline(&lines[index], &buffsize, input)) != -1) {
@@ -45,11 +48,11 @@ void reverse(FILE *input, char *output) {
 
     for (int i = index - 1; i > -1; i--)
     {
-        fprintf(stdout, "%s", lines[i]);
+        fprintf(output, "%s", lines[i]);
 
         /* Take into account the possibility of a missing new line */
         if (lines[i][strlen(lines[i])-1] != '\n') {
-            fprintf(stdout, "\n");
+            fprintf(output, "\n");
         }
     }
 
@@ -60,19 +63,20 @@ int main(int argc, char const *argv[])
 {
     /* Usage print when lacking parameters */
     if (argc < 2 || argc > 3) {
-        printf("usage: reverse <input> <output>\n");
+        fprintf(stderr, "usage: reverse <input> <output>\n");
         exit(1);
     }
     
-    FILE *input, *stdout, *output;
+    FILE *input, *output;
     {
         input = openFile(argv[1], "r");
 
         if (argc == 3){
             if (!strcmp(argv[1], argv[2])){
-                printf("Input and output file must differ\n");
+                fprintf(stderr, "Input and output file must differ\n");
                 exit(1);
             }
+            output = openFile(argv[2], "w");
             
         }
     
@@ -81,7 +85,7 @@ int main(int argc, char const *argv[])
         if (argc == 2){
             reverse(input,stdout);
         } 
-        else if (argc = 3){
+        else if (argc == 3){
             reverse(input,output);
         } 
 

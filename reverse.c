@@ -1,4 +1,4 @@
-/* Author: ryker-dev */
+/* Authors: ryker-dev, JuhoSpoof */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,12 +17,17 @@ FILE *openFile(const char* name, char* mode) {
 }
 
 void reverse(FILE *input, FILE *output) {
-    //int lengths = 10;
     char **lines;
     size_t buffsize = 32;
 
-    if (output == NULL) {
-        output = stdout;
+    /* If no input was given */
+    if (input == stdin) {
+        char *line;
+        size_t len = 0;
+        if (getline(&line, &len, stdin) != -1) {
+            fputs(line, stdout);
+            /* Function will not continue from this point */
+        }
     }
 
     if ((lines = malloc(buffsize * sizeof(char*))) == NULL){
@@ -38,6 +43,7 @@ void reverse(FILE *input, FILE *output) {
         If the buffer is not large enough to hold the line, getline() resizes it with realloc(3), updating *lineptr and *n as necessary.
     */
 
+   /* Read lines */
     int length, index = 0;
     lines[0] = NULL;
     while ((length = getline(&lines[index], &buffsize, input)) != -1) {
@@ -45,6 +51,7 @@ void reverse(FILE *input, FILE *output) {
         index++;
     }
 
+    /* Write lines */
     for (int i = index - 1; i > -1; i--)
     {
         fprintf(output, "%s", lines[i]);
@@ -61,14 +68,19 @@ void reverse(FILE *input, FILE *output) {
 int main(int argc, char const *argv[])
 {
     /* Usage print when lacking parameters */
-    if (argc < 2 || argc > 3) {
+    if (argc < 1 || argc > 3) {
         fprintf(stderr, "usage: reverse <input> <output>\n");
         exit(1);
     }
     
+    /* Check for arguments */
     FILE *input, *output;
     {
-        input = openFile(argv[1], "r");
+        if (argc > 1) {
+            input = openFile(argv[1], "r");
+        } else {
+            input = stdin;
+        }
 
         if (argc == 3){
             if (!strcmp(argv[1], argv[2])){
@@ -77,14 +89,11 @@ int main(int argc, char const *argv[])
             }
             output = openFile(argv[2], "w");
             
+        } else {
+            output = stdout;
         }
 
-        if (argc == 2){
-            reverse(input,stdout);
-        } 
-        else if (argc == 3){
-            reverse(input,output);
-        } 
+        reverse(input,output);
 
         fclose(input);
         if (argc == 3){

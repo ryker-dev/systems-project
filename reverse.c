@@ -66,13 +66,13 @@ int main(int argc, char const *argv[])
         input = openFile(argv[1], "r");
 
         if (argc == 3){
-            output = openFile(argv[2], "w");
-            if (output == input){
-                printf("Input and output file must differ");
+            if (!strcmp(argv[1], argv[2])){
+                printf("Input and output file must differ\n");
                 exit(1);
             }
+            output = openFile(argv[2], "w");
         }
-
+    
         /* TODO: Add file openining error */
         reverse(input);
         fclose(input);

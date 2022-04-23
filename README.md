@@ -44,6 +44,16 @@ Usage:      ./my-zip file1 [file2 ...]
 Example:    ./my-unzip file.z > output.txt
 ```
 
+# reverse
+Reverses the given file. If an argument the program will use are given the program will use *stdin* and *stdout* for input and output respectively.
+```
+Usage:      ./reverse input output
+
+Example:    ./reverse
+            ./reverse input.txt
+            ./reverse input.txt output.txt
+```
+
 # Requirements
 ### my-cat
 - [X]   Reads a file as specified by the user and prints its contents
@@ -73,3 +83,14 @@ Example:    ./my-unzip file.z > output.txt
 - [X]   Reads the format from my-zip
 - [X]   Works with an multiple argument files
 - [X]   Prints usage and exits with 1 when no arguments are given
+
+### reverse
+- [X]   If the input file and output file are the same file, you should print out an error message "Input and output file must differ" and exit with return code 1.
+- [X]   You may not assume anything about how long a line should be. Thus, you may have to read in a very long input line...
+- [X]   You may not assume anything about the length of the file, i.e., it may be VERY long.
+- [X]   If the user specifies an input file or output file and opening any of the them fails, you should print out the following exact error message: error: cannot open file 'input.txt' and then exit with return code 1.
+- [X]   If malloc fails print the error message "malloc failed" exit with return code 1.
+- [X]   If the user runs reverse with too many arguments, print "usage: reverse <input> <output>" and exit with return code 1.
+- [X]   On any error, you should print the error to the screen using *fprintf()*, and send the error message to *stderr.*
+- [X]   When invoked with just one command-line argument, the user supplies the input file, but the file should be printed to the screen.
+- [X]   When invoked without any arguments, your reversing program should read from standard input (stdin).

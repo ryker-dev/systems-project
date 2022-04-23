@@ -60,7 +60,7 @@ Example:    ./reverse
 - [X]   Can be used with multiple files on the command line and print out each file in order.
 - [X]   In all non-error cases, my-cat should exit with status code 0
 - [X]   If no files are specified on the command line, my-cat should just exit and return 0
-- [X]   If fopen() fails, it should print the exact message "my-cat: cannot open file" (followed by a newline) and exit with status code 1.
+- [X]   If fopen() fails, it should print the exact message `"my-cat: cannot open file"` (followed by a newline) and exit with status code 1.
 - [X]   If multiple files are specified on the command line, the files should be printed out in order until the end of the file list is reached or an error opening a file is reached (at which point the error message is printed and my-cat exits).
 
 ### my-grep
@@ -85,12 +85,12 @@ Example:    ./reverse
 - [X]   Prints usage and exits with 1 when no arguments are given
 
 ### reverse
-- [X]   If the input file and output file are the same file, you should print out an error message "Input and output file must differ" and exit with return code 1.
+- [X]   If the input file and output file are the same file, you should print out an error message `"Input and output file must differ"` and exit with return code 1.
 - [X]   You may not assume anything about how long a line should be. Thus, you may have to read in a very long input line...
 - [X]   You may not assume anything about the length of the file, i.e., it may be VERY long.
 - [X]   If the user specifies an input file or output file and opening any of the them fails, you should print out the following exact error message: error: cannot open file 'input.txt' and then exit with return code 1.
-- [X]   If malloc fails print the error message "malloc failed" exit with return code 1.
-- [X]   If the user runs reverse with too many arguments, print "usage: reverse <input> <output>" and exit with return code 1.
+- [X]   If malloc fails print the error message `"malloc failed"` exit with return code 1.
+- [X]   If the user runs reverse with too many arguments, print `"usage: reverse <input> <output>"` and exit with return code 1.
 - [X]   On any error, you should print the error to the screen using *fprintf()*, and send the error message to *stderr.*
 - [X]   When invoked with just one command-line argument, the user supplies the input file, but the file should be printed to the screen.
 - [X]   When invoked without any arguments, your reversing program should read from standard input (stdin).

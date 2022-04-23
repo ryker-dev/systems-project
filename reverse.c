@@ -24,7 +24,7 @@ void reverse(FILE *input, FILE *output) {
     if (input == stdin) {
         char *line;
         size_t len = 0;
-        if (getline(&line, &len, stdin) != -1) {
+        while (getline(&line, &len, stdin) != -1) {
             fputs(line, stdout);
             /* Function will not continue from this point */
         }

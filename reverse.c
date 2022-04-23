@@ -21,7 +21,10 @@ void reverse(FILE *input) {
     //int lengths = 10;
     char **lines;
     size_t buffsize = 32;
-    lines = malloc(buffsize * sizeof(char*));
+    if ((lines = malloc(buffsize * sizeof(char*))) == NULL){
+        perror("malloc failed\n");
+        exit(1);
+    }
 
     /*  Method for array allocation by anioss from stackoverflow.com
         "getline line by line and then store entire lines in an array in C [closed]"
@@ -54,16 +57,29 @@ int main(int argc, char const *argv[])
 {
     /* Usage print when lacking parameters */
     if (argc < 2 || argc > 3) {
-        printf("usage: reverse <input> <stdout>\n");
+        printf("usage: reverse <input> <output>\n");
         exit(1);
     }
     
-    FILE *input, *stdout;
+    FILE *input, *stdout, *output;
     {
         input = openFile(argv[1], "r");
+
+        if (argc == 3){
+            output = openFile(argv[2], "w");
+            if (output == input){
+                printf("Input and output file must differ");
+                exit(1);
+            }
+        }
+
         /* TODO: Add file openining error */
         reverse(input);
         fclose(input);
+        if (argc == 3){
+            fclose(output);
+        }
+
         /* TODO: Add output to file if argc == 3 */
     }
 

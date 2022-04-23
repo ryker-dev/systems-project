@@ -16,11 +16,14 @@ FILE *openFile(const char* name, char* mode) {
     return fp;
 }
 
-void reverse(FILE *input) {
+void reverse(FILE *input, char *output) {
     /* TODO: add malloc errors */
     //int lengths = 10;
     char **lines;
     size_t buffsize = 32;
+
+    FILE *write = openFile(output, "w");
+
     if ((lines = malloc(buffsize * sizeof(char*))) == NULL){
         perror("malloc failed\n");
         exit(1);
@@ -70,11 +73,18 @@ int main(int argc, char const *argv[])
                 printf("Input and output file must differ\n");
                 exit(1);
             }
-            output = openFile(argv[2], "w");
+            
         }
     
         /* TODO: Add file openining error */
-        reverse(input);
+
+        if (argc == 2){
+            reverse(input,stdout);
+        } 
+        else if (argc = 3){
+            reverse(input,output);
+        } 
+
         fclose(input);
         if (argc == 3){
             fclose(output);

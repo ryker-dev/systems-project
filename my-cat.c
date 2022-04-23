@@ -9,8 +9,10 @@
 int main(int argc, char const *argv[]){
 
     char buffer[BUFFERSIZE];
+    // going through every argument
     for (int i = 1; i < argc; i++)
     {
+        // file opening and error handling
         FILE *fp = fopen(argv[i], "r");
 
         if (fp == NULL) {
@@ -18,6 +20,7 @@ int main(int argc, char const *argv[]){
             exit(1);
         }
 
+        //printing lines from file
         while (fgets(buffer,BUFFERSIZE - 1,fp) != NULL){
             printf("%s" ,buffer);
         }
